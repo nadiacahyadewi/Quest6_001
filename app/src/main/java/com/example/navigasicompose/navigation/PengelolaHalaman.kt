@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.navigasicompose.ui.view.screen.DetailMahasiswaView
 import com.example.navigasicompose.ui.view.screen.MahasiswaFormView
 import com.example.navigasicompose.ui.view.screen.RencanaStudiView
 import com.example.navigasicompose.ui.view.screen.SplashView
@@ -31,19 +32,20 @@ fun MahasiswaApp(
     navController: NavHostController = rememberNavController()
 ){
     val mahasiswaUiState = mahasiswaViewModel.mahasiswaUiState.collectAsState().value
+    val rencanaUiState = krsViewModel.krsStateUI.collectAsState().value
     NavHost(
         navController = navController,
         startDestination = Halaman.Splash.name,
         modifier = Modifier.padding()
-    ){
-        composable(route = Halaman.Splash.name){
-            SplashView (onMulaiButton = {
+    ) {
+        composable(route = Halaman.Splash.name) {
+            SplashView(onMulaiButton = {
                 navController.navigate(
                     Halaman.Mahasiswa.name
                 )
-            } )
+            })
         }
-        composable(route = Halaman.Mahasiswa.name){
+        composable(route = Halaman.Mahasiswa.name) {
             MahasiswaFormView(
                 onSubmitButtonClicked = {
                     mahasiswaViewModel.saveDataMahasiswa(it)
@@ -54,13 +56,24 @@ fun MahasiswaApp(
                 }
             )
         }
-        composable(route = Halaman.MataKuliah.name){
-            RencanaStudiView (
+        composable(route = Halaman.MataKuliah.name) {
+            RencanaStudiView(
                 mahasiswa = mahasiswaUiState,
-                onSubmitButtonClicked = { krsViewModel.saveDataKRS(it)},
-                onBackButtonClicked = { navController.popBackStack()}
+                onSubmitButtonClicked = { krsViewModel.saveDataKRS(it)
+                    navController.navigate(Halaman.Tampil.name)
+                },
+                onBackButtonClicked = { navController.popBackStack() }
             )
         }
+        composable(route = Halaman.Tampil.name) {
+            DetailMahasiswaView(
+                dataMhs = mahasiswaUiState,
+                DataKRS = rencanaUiState,
+                onClickButton = {
+                    navController.popBackStack()
+                }
+            )
 
+        }
     }
-}
+    }

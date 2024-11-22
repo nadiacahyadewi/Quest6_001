@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -69,7 +71,7 @@ fun MahasiswaFormView(
         ){
             Image(
                 painter = painterResource(
-                    id = R.drawable.profil
+                    id = R.drawable.umy
                 ),
                 contentDescription = "",
                 modifier = Modifier.padding(45.dp)
@@ -79,6 +81,7 @@ fun MahasiswaFormView(
                 Text(
                     text = "Universitas Muhamadiyah Yogyakarta",
                     color = Color.Red,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
@@ -134,26 +137,26 @@ fun MahasiswaFormView(
                   singleLine = true,
                   shape = RoundedCornerShape(50.dp)
                 )
-                Spacer(modifier = Modifier.padding(8.dp))
+                Spacer(modifier = Modifier.padding(4.dp))
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = nama,
                     onValueChange = {nama = it},
-                    label = { Text(text = "Nama")},
+                    label = { Text(text = "Nama Mahasiswa")},
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Info,
+                            imageVector = Icons.Filled.Person,
                             contentDescription = ""
                         )
                     },
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number,
+                        keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next
                     ),
                     singleLine = true,
                     shape = RoundedCornerShape(50.dp)
                 )
-                Spacer(modifier = Modifier.padding(8.dp))
+                Spacer(modifier = Modifier.padding(4.dp))
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = email,
@@ -161,13 +164,13 @@ fun MahasiswaFormView(
                     label = { Text(text = "Email")},
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Info,
+                            imageVector = Icons.Filled.Email,
                             contentDescription = ""
                         )
                     },
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Next
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Done
                     ),
                     singleLine = true,
                     shape = RoundedCornerShape(50.dp)

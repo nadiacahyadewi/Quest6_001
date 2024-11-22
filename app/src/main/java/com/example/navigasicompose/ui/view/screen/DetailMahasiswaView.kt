@@ -24,6 +24,10 @@ fun DetailMahasiswaView(
         Pair("Email", dataMhs.email),
         Pair("NIM", dataMhs.nim),
     )
+    val listDataKRS = listOf(
+        Pair("Mata Kuliah", DataKRS.mataKuliah),
+        Pair("Kelas", DataKRS.kelas)
+    )
 
     Column (
         modifier = Modifier
@@ -31,6 +35,9 @@ fun DetailMahasiswaView(
             .padding(16.dp)
     ){
         listDataMhs.forEach { data -> DetailMhs(judul = data.first, isinya = data.second)
+        }
+        listDataKRS.forEach { data ->
+            DetailMhs(judul = data.first, isinya = data.second)
         }
         Button(
             onClick = {onClickButton()},
